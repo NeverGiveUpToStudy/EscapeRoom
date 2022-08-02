@@ -1,11 +1,12 @@
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    private Vector3 m_Movement;
-    private Animator m_Animator;
+    [SerializeField] private Joystick moveStick;
+    [SerializeField] private float turnSpeed = 20f;
 
-    public float turnSpeed = 20f;
+    private Vector3 m_Movement;
     private Quaternion m_Rotation = Quaternion.identity;
+    private Animator m_Animator;
     private Rigidbody m_Rigidbody;
     private AudioSource m_AudioSource;
 
@@ -18,8 +19,11 @@ public class PlayerMovement : MonoBehaviour {
 
 
     private void FixedUpdate() {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        //float horizontal = Input.GetAxis("Horizontal");
+        //float vertical = Input.GetAxis("Vertical");
+
+        float horizontal = moveStick.Horizontal;
+        float vertical = moveStick.Vertical;
 
         m_Movement.Set(horizontal, 0f, vertical);
         m_Movement.Normalize();
