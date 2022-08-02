@@ -3,9 +3,9 @@ using UnityEngine.AI;
 
 public class WaypointPatrol : MonoBehaviour {
 
-    public NavMeshAgent navMeshAgent;
+    [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private Transform[] waypoints;
 
-    public Transform[] waypoints;
     private int m_CurrentWaypointIndex;
 
     private void Start() {

@@ -1,10 +1,11 @@
 using UnityEngine;
 
 public class Observer : MonoBehaviour {
-    public Transform player;
-    private bool m_IsPlayerInRange;
 
-    public GameEnding gameEnding;
+    [SerializeField] private Transform player;
+    [SerializeField] private GameEnding gameEnding;
+
+    private bool m_IsPlayerInRange;
 
     private void OnTriggerEnter(Collider other) {
         if (player == other.transform)

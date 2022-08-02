@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameEnding : MonoBehaviour {
 
-    public float fadeDuration = 1f;
-    public float displayImageDuration = 1f;
-    public GameObject player;
+    [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private float displayImageDuration = 1f;
+    [SerializeField] private GameObject player;
 
     [SerializeField] private CanvasGroup exitBackgroundImageCanvasGroup;
     private bool m_IsPlayerAtExit;
