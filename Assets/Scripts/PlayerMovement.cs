@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    [SerializeField] private Joystick moveStick;
-    [SerializeField] private float turnSpeed = 20f;
+    [SerializeField] private Joystick moveStick;//遥控杆组件
+    [SerializeField] private float turnSpeed = 20f;//角色移动速度
 
     private Vector3 m_Movement;
     private Quaternion m_Rotation = Quaternion.identity;

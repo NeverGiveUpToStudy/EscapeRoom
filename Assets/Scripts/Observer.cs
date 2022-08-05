@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Observer : MonoBehaviour {
 
-    [SerializeField] private Transform player;
+    [SerializeField] private Transform player;//主角
     [SerializeField] private GameEnding gameEnding;
 
     private bool m_IsPlayerInRange;

@@ -10,11 +10,11 @@ public class GameEnding : MonoBehaviour {
     [SerializeField] private float displayImageDuration = 1f;
     [SerializeField] private GameObject player;
 
-    [SerializeField] private CanvasGroup exitBackgroundImageCanvasGroup;
+    [SerializeField] private CanvasGroup exitBackgroundImageCanvasGroup;//游戏胜利画面
     private bool m_IsPlayerAtExit;
     private float m_Timer;
 
-    [SerializeField] private CanvasGroup caughtBackgroundImageCanvasGroup;
+    [SerializeField] private CanvasGroup caughtBackgroundImageCanvasGroup;//游戏失败画面
     private bool m_IsPlayerCaught;
 
 
@@ -48,9 +48,9 @@ public class GameEnding : MonoBehaviour {
                 SceneManager.LoadScene(0);
             } else {
 #if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
+                EditorApplication.isPlaying = false;//开发阶段停止调试
 #else
-                Application.Quit();
+                Application.Quit();//release包直接退出游戏
 #endif
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class WaypointPatrol : MonoBehaviour {
 
     [SerializeField] private NavMeshAgent navMeshAgent;
-    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private Transform[] waypoints;//幽灵自动寻路点
 
     private int m_CurrentWaypointIndex = 0;
 
