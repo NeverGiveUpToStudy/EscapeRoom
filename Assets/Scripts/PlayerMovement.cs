@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        moveStick.GetComponent<VariableJoystick>().SetMode(JoystickType.Dynamic);
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_AudioSource = GetComponent<AudioSource>();
