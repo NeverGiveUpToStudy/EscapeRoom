@@ -2,18 +2,20 @@
 using UnityEngine;
 
 [CustomEditor(typeof(Joystick), true)]
-public class JoystickEditor : Editor {
-    private SerializedProperty handleRange;
-    private SerializedProperty deadZone;
+public class JoystickEditor : Editor
+{
     private SerializedProperty axisOptions;
-    private SerializedProperty snapX;
-    private SerializedProperty snapY;
     protected SerializedProperty background;
-    private SerializedProperty handle;
 
     protected Vector2 center = new Vector2(0.5f, 0.5f);
+    private SerializedProperty deadZone;
+    private SerializedProperty handle;
+    private SerializedProperty handleRange;
+    private SerializedProperty snapX;
+    private SerializedProperty snapY;
 
-    protected virtual void OnEnable() {
+    protected virtual void OnEnable()
+    {
         handleRange = serializedObject.FindProperty("handleRange");
         deadZone = serializedObject.FindProperty("deadZone");
         axisOptions = serializedObject.FindProperty("axisOptions");
@@ -23,7 +25,8 @@ public class JoystickEditor : Editor {
         handle = serializedObject.FindProperty("handle");
     }
 
-    public override void OnInspectorGUI() {
+    public override void OnInspectorGUI()
+    {
         serializedObject.Update();
 
         DrawValues();
@@ -32,8 +35,9 @@ public class JoystickEditor : Editor {
 
         serializedObject.ApplyModifiedProperties();
 
-        if (handle != null) {
-            RectTransform handleRect = (RectTransform)handle.objectReferenceValue;
+        if (handle != null)
+        {
+            var handleRect = (RectTransform)handle.objectReferenceValue;
             handleRect.anchorMax = center;
             handleRect.anchorMin = center;
             handleRect.pivot = center;
@@ -41,16 +45,21 @@ public class JoystickEditor : Editor {
         }
     }
 
-    protected virtual void DrawValues() {
-        EditorGUILayout.PropertyField(handleRange, new GUIContent("Handle Range", "The distance the visual handle can move from the center of the joystick."));
-        EditorGUILayout.PropertyField(deadZone, new GUIContent("Dead Zone", "The distance away from the center input has to be before registering."));
+    protected virtual void DrawValues()
+    {
+        EditorGUILayout.PropertyField(handleRange,
+            new GUIContent("Handle Range", "The distance the visual handle can move from the center of the joystick."));
+        EditorGUILayout.PropertyField(deadZone,
+            new GUIContent("Dead Zone", "The distance away from the center input has to be before registering."));
         EditorGUILayout.PropertyField(axisOptions, new GUIContent("Axis Options", "Which axes the joystick uses."));
         EditorGUILayout.PropertyField(snapX, new GUIContent("Snap X", "Snap the horizontal input to a whole value."));
         EditorGUILayout.PropertyField(snapY, new GUIContent("Snap Y", "Snap the vertical input to a whole value."));
     }
 
-    protected virtual void DrawComponents() {
-        EditorGUILayout.ObjectField(background, new GUIContent("Background", "The background's RectTransform component."));
+    protected virtual void DrawComponents()
+    {
+        EditorGUILayout.ObjectField(background,
+            new GUIContent("Background", "The background's RectTransform component."));
         EditorGUILayout.ObjectField(handle, new GUIContent("Handle", "The handle's RectTransform component."));
     }
 }

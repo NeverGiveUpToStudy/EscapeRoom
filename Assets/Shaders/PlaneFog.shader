@@ -9,7 +9,10 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "Queue"="Transparent"}
+        Tags
+        {
+            "RenderType"="Opaque" "Queue"="Transparent"
+        }
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
@@ -42,35 +45,37 @@
             float4 _FogParam;
             float _FogTint;
 
-            v2f vert (appdata v)
+            v2f vert(appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
-                o.screenPos =  ComputeScreenPos(o.vertex);
+                o.screenPos = ComputeScreenPos(o.vertex);
                 COMPUTE_EYEDEPTH(o.depth);
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target
             {
-                float noiseValue1 = tex2D(_NoiseTex, float2(i.uv.x + _Time.x * _FogParam.w, i.uv.y - _Time.x * _FogParam.w)).r;
-                float noiseValue2 = tex2D(_NoiseTex, float2(i.uv.x - _Time.x * _FogParam.w, i.uv.y + _Time.x * _FogParam.w)).r;
-                
+                float noiseValue1 = tex2D(
+                    _NoiseTex, float2(i.uv.x + _Time.x * _FogParam.w, i.uv.y - _Time.x * _FogParam.w)).r;
+                float noiseValue2 = tex2D(
+                    _NoiseTex, float2(i.uv.x - _Time.x * _FogParam.w, i.uv.y + _Time.x * _FogParam.w)).r;
+
                 float noiseValue = (noiseValue1 + noiseValue2) * 0.5f;
-                
+
                 float offset = noiseValue - 0.5f;
-            
+
                 float depth = (tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
                 depth = LinearEyeDepth(depth) - i.depth;
-                
+
                 depth += offset * _FogParam.z;
-                
+
                 depth = smoothstep(0.0f, _FogParam.x, depth) * _FogParam.y;
                 depth = saturate(depth);
-    
-                fixed4 col = float4(_Color.xyz * lerp(1.0f, noiseValue, _FogTint),depth);
-                
+
+                fixed4 col = float4(_Color.xyz * lerp(1.0f, noiseValue, _FogTint), depth);
+
                 return col;
             }
             ENDCG

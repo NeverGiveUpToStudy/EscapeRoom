@@ -1,3 +1,3 @@
-﻿public class FixedJoystick : Joystick {
-
+﻿public class FixedJoystick : Joystick
+{
 }
