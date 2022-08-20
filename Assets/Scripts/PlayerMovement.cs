@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Joystick moveStick; //遥控杆组件
+    [SerializeField] private VariableJoystick moveStick; //遥控杆组件
     [SerializeField] private float turnSpeed = 20f; //角色移动速度
     private Animator m_Animator;
     private AudioSource m_AudioSource;
@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        moveStick.GetComponent<VariableJoystick>().SetMode(JoystickType.Dynamic);
+        moveStick.SetMode(JoystickType.Floating);
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_AudioSource = GetComponent<AudioSource>();
